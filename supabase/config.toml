@@ -1,0 +1,9 @@
+project_id = "zwgmmfnqzbnzmaierzyw"
+
+[functions.ai-marketing-assistant]
+enabled = true
+verify_jwt = false
+
+[functions.team-invite]
+enabled = true
+verify_jwt = true
