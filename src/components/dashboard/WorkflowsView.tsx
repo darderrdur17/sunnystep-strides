@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { WorkflowExample, abandonedCartWorkflow, welcomeWorkflow } from "./WorkflowExample";
+import { WorkflowExample } from "./WorkflowExample";
+import { abandonedCartWorkflow, welcomeWorkflow } from "./workflowExamplesData";
 import { ShoppingCart, User, Tag, Sparkles, ArrowRight, Zap, Gift } from "lucide-react";
 import { WorkflowCreator } from "./WorkflowCreator";
 

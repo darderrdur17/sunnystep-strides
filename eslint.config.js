@@ -23,4 +23,13 @@ export default tseslint.config(
       "@typescript-eslint/no-unused-vars": "off",
     },
   },
+  {
+    // Vendored shadcn/ui components intentionally export both components and
+    // cva variant helpers / utility functions. This is the library's designed
+    // shape and does not affect fast-refresh reliability in application code.
+    files: ["src/components/ui/**/*.{ts,tsx}"],
+    rules: {
+      "react-refresh/only-export-components": "off",
+    },
+  },
 );

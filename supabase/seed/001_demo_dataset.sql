@@ -96,9 +96,9 @@ select
   (((a.base * (0.8 + 0.4 * random())) / a.aov) * (2 + random() * 2))::int as actions_taken,
   ((a.base * (0.8 + 0.4 * random())) / a.roi)::int                        as cost
 from (values
-  ('Campaign Agent',       'd0c0a000-0000-4000-8000-0000000000c1', 8900, 140, 7.2),
-  ('Abandoned Cart Agent', 'd0c0a000-0000-4000-8000-0000000000c2', 3500, 165, 4.75),
-  ('Lifecycle Agent',      'd0c0a000-0000-4000-8000-0000000000c3', 4840, 130, 4.65),
-  ('Creative Agent',       'd0c0a000-0000-4000-8000-0000000000c4', 1870, 120, 2.85)
+  ('Campaign Agent',       'd0c0a000-0000-4000-8000-0000000000c1'::uuid, 8900, 140, 7.2),
+  ('Abandoned Cart Agent', 'd0c0a000-0000-4000-8000-0000000000c2'::uuid, 3500, 165, 4.75),
+  ('Lifecycle Agent',      'd0c0a000-0000-4000-8000-0000000000c3'::uuid, 4840, 130, 4.65),
+  ('Creative Agent',       'd0c0a000-0000-4000-8000-0000000000c4'::uuid, 1870, 120, 2.85)
 ) as a(agent_name, campaign_id, base, aov, roi)
 cross join generate_series(0, 13) as g(d);

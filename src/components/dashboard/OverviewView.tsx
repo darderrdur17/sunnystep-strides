@@ -110,16 +110,16 @@ async function loadOverview(): Promise<OverviewData> {
     revenueChangePct = prev > 0 ? Math.round(((last - prev) / prev) * 1000) / 10 : null;
   }
 
-  const activeCampaigns = camps.filter((c: any) => c.status === "active").length;
+  const activeCampaigns = camps.filter((c) => c.status === "active").length;
   const conversions = camps
-    .map((c: any) => Number(c.conversion_rate))
+    .map((c) => Number(c.conversion_rate))
     .filter((n: number) => !Number.isNaN(n));
   const avgConversion =
     conversions.length > 0
       ? Math.round((conversions.reduce((a, b) => a + b, 0) / conversions.length) * 10) / 10
       : null;
 
-  const campaigns: Campaign[] = camps.map((c: any) => ({
+  const campaigns: Campaign[] = camps.map((c) => ({
     id: c.id,
     name: c.name,
     type: (["email", "sms", "web"].includes(c.type) ? c.type : "email") as Campaign["type"],

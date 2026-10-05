@@ -27,7 +27,13 @@ const sampleData: PerformancePoint[] = [
   { name: "Jul", revenue: 67200, conversions: 850 },
 ];
 
-const CustomTooltip = ({ active, payload, label }: any) => {
+interface ChartTooltipProps {
+  active?: boolean;
+  payload?: Array<{ value?: number | string; name?: string }>;
+  label?: string | number;
+}
+
+const CustomTooltip = ({ active, payload, label }: ChartTooltipProps) => {
   if (active && payload && payload.length) {
     return (
       <div className="rounded-lg border border-border bg-card p-3 shadow-lg">

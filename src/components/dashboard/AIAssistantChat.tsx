@@ -24,7 +24,8 @@ interface Message {
 
 /** Translate transport / function / gateway errors into a useful message. */
 function describeError(err: unknown): string {
-  const raw = typeof err === "string" ? err : (err as any)?.message || "Unknown error";
+  const raw =
+    typeof err === "string" ? err : ((err as { message?: string }).message ?? "Unknown error");
   const msg = String(raw);
   if (/rate limit/i.test(msg))
     return "The AI service is rate-limited right now. Please wait a moment and try again.";

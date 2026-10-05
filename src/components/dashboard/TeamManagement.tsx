@@ -28,6 +28,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, Dialog
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
+import { Json } from "@/integrations/supabase/types";
 import { supabase } from "@/integrations/supabase/client";
 import { formatDistanceToNow } from "date-fns";
 
@@ -276,7 +277,7 @@ export function TeamManagement() {
   const logAuditEvent = useCallback(async (params: {
     actionType: string;
     summary: string;
-    metadata?: Record<string, unknown>;
+    metadata?: Json;
   }) => {
     if (!activeTeamId || !currentUser) return;
 
@@ -286,7 +287,7 @@ export function TeamManagement() {
       actor_email: currentUser.email ?? null,
       action_type: params.actionType,
       action_summary: params.summary,
-      metadata: (params.metadata ?? {}) as never,
+      metadata: params.metadata ?? {},
     });
   }, [activeTeamId, currentUser]);
 

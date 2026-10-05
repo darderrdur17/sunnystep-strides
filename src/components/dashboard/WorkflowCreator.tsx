@@ -47,7 +47,7 @@ interface WorkflowStep {
   id: string;
   type: "trigger" | "condition" | "action" | "wait";
   name: string;
-  config: Record<string, any>;
+  config: Record<string, unknown>;
 }
 
 const workflowTemplates: WorkflowTemplate[] = [
@@ -234,7 +234,7 @@ export function WorkflowCreator({ onWorkflowCreated }: WorkflowCreatorProps) {
             exit={{ opacity: 0, x: -20 }}
             className="space-y-4"
           >
-            <RadioGroup value={creationType} onValueChange={(v) => setCreationType(v as any)}>
+            <RadioGroup value={creationType} onValueChange={(v) => setCreationType(v as "template" | "custom")}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div 
                   className={`p-4 rounded-xl border-2 cursor-pointer transition-all ${

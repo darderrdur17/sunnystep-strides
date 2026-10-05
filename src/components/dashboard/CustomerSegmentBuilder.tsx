@@ -159,7 +159,7 @@ export function CustomerSegmentBuilder() {
     toast.success(`Segment "${segmentName}" saved successfully`);
   };
 
-  const useAISuggestion = (segment: Segment) => {
+  const applyAISuggestion = (segment: Segment) => {
     setSegmentName(segment.name);
     setSegmentDescription(segment.description);
     setRules([...segment.rules]);
@@ -190,7 +190,7 @@ export function CustomerSegmentBuilder() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  onClick={() => useAISuggestion(segment)}
+                  onClick={() => applyAISuggestion(segment)}
                   whileHover={{ scale: 1.02 }}
                 >
                   <div className="flex items-center justify-between mb-2">

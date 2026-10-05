@@ -22,6 +22,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { Json } from "@/integrations/supabase/types";
 
 interface EmailBlock {
   id: string;
@@ -166,7 +167,7 @@ export function EmailTemplateBuilder() {
       await supabase.from("email_templates").insert([{
         name: templateName,
         subject,
-        content: blocks as any,
+        content: blocks as Json,
         category: "marketing"
       }]);
       toast({ title: "Template saved successfully!" });

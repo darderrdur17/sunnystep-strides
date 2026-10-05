@@ -98,7 +98,7 @@ export async function fetchOverview(): Promise<OverviewMetrics> {
       ? Math.round((conversions.reduce((a, b) => a + b, 0) / conversions.length) * 10) / 10
       : null;
 
-  const campaigns: CampaignSummary[] = camps.map((c: any) => ({
+  const campaigns: CampaignSummary[] = camps.map((c: Record<string, unknown>) => ({
     id: asStr(c.id),
     name: asStr(c.name),
     type: (["email", "sms", "web"].includes(asStr(c.type)) ? asStr(c.type) : "email") as CampaignSummary["type"],
@@ -149,8 +149,8 @@ export async function fetchAnalytics(): Promise<AnalyticsData> {
     supabase.from("agent_revenue").select("agent_name, revenue"),
   ]);
 
-  const camps = (campRows ?? []) as any[];
-  const revs = (revRows ?? []) as any[];
+  const camps = (campRows ?? []) as Record<string, unknown>[];
+  const revs = (revRows ?? []) as Record<string, unknown>[];
 
   const channelMap = new Map<string, ChannelPerformance>();
   for (const c of camps) {

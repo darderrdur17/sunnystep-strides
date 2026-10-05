@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { 
   Settings, 
@@ -41,9 +41,9 @@ export function AgentConfigurationPanel() {
 
   useEffect(() => {
     fetchConfigs();
-  }, []);
+  }, [fetchConfigs]);
 
-  const fetchConfigs = async () => {
+  const fetchConfigs = useCallback(async () => {
     setLoading(true);
     const { data, error } = await supabase
       .from("agent_configurations")
@@ -56,9 +56,9 @@ export function AgentConfigurationPanel() {
       setConfigs(data || []);
     }
     setLoading(false);
-  };
+  }, [toast]);
 
-  const updateConfig = (id: string, field: keyof AgentConfig, value: any) => {
+  const updateConfig = <K extends keyof AgentConfig>(id: string, field: K, value: AgentConfig[K]) => {
     setConfigs(prev => 
       prev.map(c => c.id === id ? { ...c, [field]: value } : c)
     );

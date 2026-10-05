@@ -116,7 +116,13 @@ const kpiForecasts = [
   },
 ];
 
-const CustomTooltip = ({ active, payload, label }: any) => {
+interface ChartTooltipProps {
+  active?: boolean;
+  payload?: Array<{ value?: number | string; name?: string }>;
+  label?: string | number;
+}
+
+const CustomTooltip = ({ active, payload, label }: ChartTooltipProps) => {
   if (active && payload && payload.length) {
     return (
       <div className="bg-card border border-border rounded-lg p-3 shadow-lg">
@@ -124,13 +130,13 @@ const CustomTooltip = ({ active, payload, label }: any) => {
         {payload[0]?.value && (
           <p className="text-sm">
             <span className="text-muted-foreground">Actual: </span>
-            <span className="font-semibold text-primary">${(payload[0].value / 1000).toFixed(0)}k</span>
+            <span className="font-semibold text-primary">${(Number(payload[0]?.value) / 1000).toFixed(0)}k</span>
           </p>
         )}
         {payload[1]?.value && (
           <p className="text-sm">
             <span className="text-muted-foreground">Forecast: </span>
-            <span className="font-semibold text-success">${(payload[1].value / 1000).toFixed(0)}k</span>
+            <span className="font-semibold text-success">${(Number(payload[1]?.value) / 1000).toFixed(0)}k</span>
           </p>
         )}
       </div>

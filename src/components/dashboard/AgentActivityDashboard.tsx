@@ -12,6 +12,7 @@ import {
   CheckCircle2,
   AlertCircle,
   Filter,
+  type LucideIcon,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -19,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
 import { supabase } from "@/integrations/supabase/client";
+import { Json } from "@/integrations/supabase/types";
 import { EmptyDataState } from "@/components/DataProvenance";
 
 interface AgentActivity {
@@ -29,7 +31,7 @@ interface AgentActivity {
   description: string | null;
   status: string;
   created_at: string;
-  metadata: any;
+  metadata: Json;
 }
 
 interface AgentStat {
@@ -38,7 +40,7 @@ interface AgentStat {
   revenue: number;
 }
 
-const agentIcons: Record<string, any> = {
+const agentIcons: Record<string, LucideIcon> = {
   "Campaign Agent": Target,
   "Abandoned Cart Agent": ShoppingCart,
   "Lifecycle Agent": TrendingUp,
@@ -52,7 +54,7 @@ const agentColors: Record<string, string> = {
   "Creative Agent": "text-accent",
 };
 
-const statusIcons: Record<string, any> = {
+const statusIcons: Record<string, LucideIcon> = {
   completed: CheckCircle2,
   pending: Clock,
   failed: AlertCircle,
@@ -123,9 +125,9 @@ export function AgentActivityDashboard() {
         };
       }
       for (const r of rev ?? []) {
-        const name = (r as any).agent_name as string;
+        const name = r.agent_name as string;
         const cur = nextStats[name] ?? { actions: 0, success: 0, revenue: 0 };
-        cur.revenue += Number((r as any).revenue) || 0;
+        cur.revenue += Number(r.revenue) || 0;
         nextStats[name] = cur;
       }
       setActivities(rows);

@@ -7,7 +7,7 @@ export interface PushNotificationPayload {
   icon?: string;
   badge?: string;
   tag?: string;
-  data?: Record<string, any>;
+  data?: Record<string, unknown>;
 }
 
 export const isPushSupported = (): boolean => {
@@ -54,7 +54,7 @@ export const showLocalNotification = async (payload: PushNotificationPayload): P
       
       // Navigate to relevant section if data provided
       if (payload.data?.route) {
-        window.location.hash = payload.data.route;
+        window.location.hash = payload.data.route as string;
       }
     };
     
